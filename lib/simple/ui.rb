@@ -70,10 +70,15 @@ module UI
   end
 
   def benchmark(msg, *args, &block)
+    severity = :warn
+    if msg.is_a?(Symbol)
+      severity, msg = msg, args.shift
+    end
+    
     start = Time.now
     yield.tap do
       msg += ": #{(1000 * (Time.now - start)).to_i} msecs."
-      UI.log self, :warn, msg, *args
+      UI.log self, severity, msg, *args
     end
   end
   
