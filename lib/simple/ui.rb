@@ -1,5 +1,5 @@
 module UI
-  VERSION = "0.1.1"
+  VERSION = "0.1.2"
   
   def self.verbosity
     @verbosity ||= 1
