@@ -62,7 +62,6 @@ module UI
 
   def error(msg, *args)
     UI.log self, :error, msg, *args
-    exit 1
   end
 
   def success(msg, *args)
