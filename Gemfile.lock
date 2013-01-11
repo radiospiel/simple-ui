@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    simple-ui (0.1.1)
+    simple-ui (0.1.2)
       expectation
       sinatra
 
 GEM
   remote: http://rubygems.org/
   specs:
-    expectation (0.2.0)
+    expectation (0.3.0)
     metaclass (0.0.1)
     mocha (0.13.1)
       metaclass (~> 0.0.1)

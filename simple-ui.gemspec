@@ -12,12 +12,9 @@ Gem::Specification.new do |gem|
 
   gem.author   = "radiospiel"
   gem.email    = "eno@radiospiel.org"
-  gem.homepage = "http://github.com/radiospiel/sinatra-sse"
-  gem.summary  = "Sinatra support for server sent events"
+  gem.homepage = "http://github.com/radiospiel/simple-ui"
+  gem.summary  = "Simple code for simple things in the console"
 
-  gem.add_dependency "expectation"
-  gem.add_dependency "sinatra"
-  
   gem.description = gem.summary
 
   gem.files = Dir["**/*"].select { |d| d =~ %r{^(README|bin/|data/|ext/|lib/|spec/|test/)} }
