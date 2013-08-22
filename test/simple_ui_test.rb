@@ -5,6 +5,6 @@ require_relative 'test_helper'
 
 class SimpleUITest < Test::Unit::TestCase
   def test_loaded
-    "string".warn "hello world!"
+    UI.warn "hello world!"
   end
 end

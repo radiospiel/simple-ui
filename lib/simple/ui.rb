@@ -1,5 +1,7 @@
 module UI
-  VERSION = "0.1.2"
+  extend self
+  
+  VERSION = "0.2.0"
   
   def self.verbosity
     @verbosity ||= 1
@@ -49,23 +51,23 @@ module UI
   }
 
   def debug(msg, *args)
-    UI.log self, :debug, msg, *args
+    UI.log :debug, msg, *args
   end
 
   def info(msg, *args)
-    UI.log self, :info, msg, *args
+    UI.log :info, msg, *args
   end
 
   def warn(msg, *args)
-    UI.log self, :warn, msg, *args
+    UI.log :warn, msg, *args
   end
 
   def error(msg, *args)
-    UI.log self, :error, msg, *args
+    UI.log :error, msg, *args
   end
 
   def success(msg, *args)
-    UI.log self, :success, msg, *args
+    UI.log :success, msg, *args
   end
 
   def benchmark(msg, *args, &block)
@@ -77,13 +79,13 @@ module UI
     start = Time.now
     yield.tap do
       msg += ": #{(1000 * (Time.now - start)).to_i} msecs."
-      UI.log self, severity, msg, *args
+      UI.log severity, msg, *args
     end
   end
   
   private
   
-  def self.log(sender, sym, msg, *args)
+  def self.log(sym, msg, *args)
     rv = args.empty? ? msg : args.first
     
     return rv unless verbosity >= MIN_VERBOSITY[sym] 
@@ -94,11 +96,7 @@ module UI
 
     timestamp = "[%3d msecs]" % (1000 * (Time.now - @@started_at))
     
-    if sender_name = sender.send(:log_inspect)
-      sender_name = "[#{sender_name}] " 
-    end
-
-    msg = "#{timestamp} #{sender_name}#{msg}"
+    msg = "#{timestamp} #{msg}"
 
     if color = COLORS[MESSAGE_COLOR[sym]]
       msg = "#{color}#{msg}#{COLORS[:clear]}"
@@ -108,15 +106,4 @@ module UI
 
     rv
   end
-  
-  def log_inspect
-  end
-end
-
-class Object
-  include UI
-end
-
-class String
-  alias :log_inspect :to_s
 end

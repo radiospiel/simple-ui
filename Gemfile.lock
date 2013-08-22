@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    simple-ui (0.1.2)
+    simple-ui (0.2.0)
 
 GEM
   remote: http://rubygems.org/
