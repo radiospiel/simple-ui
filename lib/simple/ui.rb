@@ -83,6 +83,18 @@ module UI
     end
   end
 
+  def self.colored=(colored)
+    @colored = colored
+  end
+
+  def self.colored?
+    if @colored.nil?
+      @colored = STDERR.tty?
+    end
+
+    @colored != false
+  end
+
   private
 
   def self.log(sym, msg, *args)
@@ -94,12 +106,15 @@ module UI
       msg += ": " + args.map(&:inspect).join(", ")
     end
 
-    timestamp = "[%3d msecs]" % (1000 * (Time.now - @@started_at))
-
-    msg = "#{timestamp} #{msg}"
-
-    if color = COLORS[MESSAGE_COLOR[sym]]
+    if color = colored? && COLORS[MESSAGE_COLOR[sym]]
       msg = "#{color}#{msg}#{COLORS[:clear]}"
+    end
+
+    if verbosity > 2
+      source = caller[1]
+      source.gsub!( Dir.getwd, "." )
+      source.gsub!( File.expand_path("~"), "~" )
+      msg = "%-90s from: %s" % [ msg, source ]
     end
 
     STDERR.puts msg
