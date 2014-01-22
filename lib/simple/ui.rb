@@ -77,10 +77,16 @@ module UI
     end
 
     start = Time.now
-    yield.tap do
-      msg += ": #{(1000 * (Time.now - start)).to_i} msecs."
-      UI.log severity, msg, *args
-    end
+    r = yield
+
+    msg += ": #{(1000 * (Time.now - start)).to_i} msecs."
+    UI.log severity, msg, *args
+
+    r
+  rescue StandardError
+    msg += "raises #{$!.class.name} after #{(1000 * (Time.now - start)).to_i} msecs."
+    UI.log severity, msg, *args
+    raise $!
   end
 
   def self.colored=(colored)
