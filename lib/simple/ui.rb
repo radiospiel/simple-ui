@@ -1,7 +1,10 @@
-module UI
+module Simple
+end
+
+module Simple::UI
   extend self
 
-  VERSION = "0.2.2"
+  VERSION = "0.3.0"
 
   def self.verbosity
     @verbosity ||= 1
@@ -51,23 +54,23 @@ module UI
   }
 
   def debug(msg, *args)
-    UI.log :debug, msg, *args
+    Simple::UI.log :debug, msg, *args
   end
 
   def info(msg, *args)
-    UI.log :info, msg, *args
+    Simple::UI.log :info, msg, *args
   end
 
   def warn(msg, *args)
-    UI.log :warn, msg, *args
+    Simple::UI.log :warn, msg, *args
   end
 
   def error(msg, *args)
-    UI.log :error, msg, *args
+    Simple::UI.log :error, msg, *args
   end
 
   def success(msg, *args)
-    UI.log :success, msg, *args
+    Simple::UI.log :success, msg, *args
   end
 
   def benchmark(msg, *args, &block)
@@ -80,12 +83,12 @@ module UI
     r = yield
 
     msg += ": #{(1000 * (Time.now - start)).to_i} msecs."
-    UI.log severity, msg, *args
+    Simple::UI.log severity, msg, *args
 
     r
   rescue StandardError
     msg += "raises #{$!.class.name} after #{(1000 * (Time.now - start)).to_i} msecs."
-    UI.log severity, msg, *args
+    Simple::UI.log severity, msg, *args
     raise $!
   end
 

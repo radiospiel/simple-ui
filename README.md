@@ -4,16 +4,16 @@ A really simple UI helper, supporting
 
 - logging severities (:debug, :info, :warn, :error, :success)
 
-    UI.warn "This is a warning"
+    Simple::UI.warn "This is a warning"
 
 - ...with different colors...
 
-    UI.success "success is green"
-    UI.error "error is red"
+    Simple::UI.success "success is green"
+    Simple::UI.error "error is red"
 
 - ...with inspect'ing arguments after the first
 
-    UI.warn "Some things", 1, "foo\nline", :bar
+    Simple::UI.warn "Some things", 1, "foo\nline", :bar
     # =>
     # Some things 1, "foo\nline", :bar
 

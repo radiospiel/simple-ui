@@ -8,7 +8,7 @@ require "simple/ui"
 
 Gem::Specification.new do |gem|
   gem.name     = "simple-ui"
-  gem.version  = UI::VERSION
+  gem.version  = Simple::UI::VERSION
 
   gem.author   = "radiospiel"
   gem.email    = "eno@radiospiel.org"
